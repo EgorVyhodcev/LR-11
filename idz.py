@@ -3,20 +3,24 @@
 
 
 from threading import Thread
-from math import factorial, cos
+from math import cos
 
 
 eps = .0000001
 
 
 def inf_sum(x, check, num):
+    a = 1
     summa = 1
     i = 1
     prev = 0
     while abs(summa - prev) > eps:
+        a = a * x ** 2 / ((2 * i) * (2 * i - 1))
         prev = summa
-        summa += ((-1)**i * (x**(2*i))) / factorial(2*i)
-        #print(summa)
+        if i % 2 == 0:
+            summa += a
+        else:
+            summa += -1 * a
         i += 1
     print(f"The sum number: {num} is: {summa}")
     print(f"Check: cos({x}) = {check}")
